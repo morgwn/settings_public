@@ -1,0 +1,22 @@
+<application>
+  <component name="CodeFoldingSettings">
+    <option name="COLLAPSE_IMPORTS" value="false" />
+  </component>
+  <component name="CodeInsightSettings">
+    <option name="selectAutopopupSuggestionsByChars" value="true" />
+    <option name="SELECT_AUTOPOPUP_SUGGESTIONS_BY_CHARS" value="true" />
+    <option name="REFORMAT_BLOCK_ON_RBRACE" value="false" />
+  </component>
+  <component name="DefaultFont">
+    <option name="FONT_SIZE" value="14" />
+    <option name="FONT_FAMILY" value="Pragmata Pro" />
+  </component>
+  <component name="EditorSettings">
+    <option name="IS_BLOCK_CURSOR" value="true" />
+    <option name="REFRAIN_FROM_SCROLLING" value="true" />
+  </component>
+  <component name="OCCodeFoldingSettings">
+    <option name="collapseConditionallyNotCompiled" value="false" />
+    <option name="COLLAPSE_CONDITIONALLY_NOT_COMPILED" value="false" />
+  </component>
+</application>
