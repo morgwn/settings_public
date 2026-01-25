@@ -1,0 +1,30 @@
+// Run "Package Control: Advanced Install Package" and paste the following:
+//
+//   "BetterFindBuffer", "BracketHighlighter", "Chain of Command", "Color Highlighter", "ColorPicker", "Dayle Rees Color Schemes", "Emacs Pro Essentials", "FileBrowser", "Filter Lines", "Git", "GitGutter", "Harper Color Scheme", "Open Finder", "ProjectManager", "Sublime Bookmarks", "Sublime Files", "Terminal", "Theme - Centurion", "Theme - Hero", "Theme - itg.flat"
+
+{
+	"installed_packages":
+	[
+		"BetterFindBuffer",
+		"BracketHighlighter",
+		"Chain of Command",
+		"Color Highlighter",
+		"ColorPicker",
+		"Dayle Rees Color Schemes",
+		"Emacs Pro Essentials",
+		"FileBrowser",
+		"Filter Lines",
+		"Git",
+		"GitGutter",
+		"Harper Color Scheme",
+		"Open Finder",
+		"Package Control",
+		"ProjectManager",
+		"Sublime Bookmarks",
+		"Sublime Files",
+		"Terminal",
+		"Theme - Centurion",
+		"Theme - Hero",
+		"Theme - itg.flat"
+	]
+}
