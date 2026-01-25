@@ -1,0 +1,609 @@
+;; mac specific
+(when (eq system-type 'darwin)
+  ;; use command key
+  (setq mac-command-modifier 'meta)
+  
+  ;; fix for "ls doesn't support the --dired option" 
+  (setq dired-use-ls-dired nil)
+)
+
+;; move
+(keyboard-translate ?\C-i           'up)   
+(keyboard-translate ?\C-j           'left)
+(keyboard-translate ?\C-k           'down)
+(keyboard-translate ?\C-l           'right)
+(define-key global-map "\C-n"       'scroll-up-command)
+(define-key global-map "\C-p"       'scroll-down-command)
+(autoload 'viper-forward-word "viper-cmd")
+(autoload 'viper-backward-word "viper-cmd")
+(define-key global-map "\C-f"       'forward-word) ; 'viper-forward-word) ; (lambda () (interactive) (forward-same-syntax 1)))
+(define-key global-map "\C-b"       'backward-word) ; 'viper-backward-word) ; (lambda () (interactive) (forward-same-syntax -1)))
+(autoload 'crisp-home "crisp")
+(autoload 'crisp-end "crisp")
+(define-key global-map "\C-a"       'crisp-home)
+(define-key global-map "\C-e"       'crisp-end)
+
+;; delete
+(define-key global-map "\C-u"       'backward-delete-char)
+(define-key global-map "\C-o"       'delete-char)
+(define-key global-map "\C-t"       (lambda() (interactive) (setq p (point)) (viper-forward-word 1) (kill-region p (point))))
+(define-key global-map "\C-d"       'kill-line)
+(global-set-key (kbd "C-d")         'kill-line) ; force this in all modes!
+(define-key global-map "\M-d"       'kill-whole-line)
+
+;; window
+(define-key ctl-x-map [up]          'windmove-up)
+(define-key ctl-x-map [down]        'windmove-down)
+(define-key ctl-x-map [left]        'windmove-left)
+(define-key ctl-x-map [right]       'windmove-right)
+(defun do-split-window-below ()     (interactive) (split-window-vertically) (other-window 1))
+(defun do-split-window-right ()     (interactive) (split-window-horizontally) (other-window 1))
+(define-key global-map "\C-x2"      'do-split-window-below)
+(define-key global-map "\C-x5"      'do-split-window-right)
+(define-key global-map "\C-xz"      'delete-other-windows)
+
+;; bookmarks
+(defun do-save-bookmark ()          (interactive) (bookmark-set (format "%s:%s - %s" (buffer-name) (line-number-at-pos) (read-string "Bookmark comment: "))))
+(define-key global-map (kbd "C-M-m") 'do-save-bookmark)
+(define-key global-map "\M-m"       'list-bookmarks)
+
+;; toggle between header and source
+(require 'find-file)
+(setq ff-always-try-to-create nil)
+(define-key global-map [C-tab]      'ff-find-other-file)
+
+;; bufed
+(define-key global-map "\C-x\C-b"    (lambda() (interactive) (switch-to-buffer (list-buffers-noselect nil))))
+(define-key Buffer-menu-mode-map "1" (lambda() (interactive) (delete-other-windows) (Buffer-menu-this-window))) ; don't save layout
+(define-key Buffer-menu-mode-map "2" (lambda() (interactive) (do-split-window-below) (Buffer-menu-this-window)))
+(define-key Buffer-menu-mode-map "5" (lambda() (interactive) (do-split-window-right) (Buffer-menu-this-window)))
+
+;; dired
+(require 'dired)
+(define-key dired-mode-map "."      'dired-up-directory)
+(define-key dired-mode-map "1"      (lambda() (interactive) (delete-other-windows) (find-file (dired-get-filename))))
+(define-key dired-mode-map "2"      (lambda() (interactive) (do-split-window-below) (find-file (dired-get-filename))))
+(define-key dired-mode-map "5"      (lambda() (interactive) (do-split-window-right) (find-file (dired-get-filename))))
+
+;; grep
+(require 'grep)
+(defun grep-same-window ()          (interactive) (let ((display-buffer-overriding-action '(display-buffer-same-window (inhibit-same-window . nil)))) (compile-goto-error)))
+(define-key grep-mode-map "1"       (lambda() (interactive) (delete-other-windows) (grep-same-window)))
+(define-key grep-mode-map "2"       (lambda() (interactive) (do-split-window-below) (grep-same-window)))
+(define-key grep-mode-map "5"       (lambda() (interactive) (do-split-window-right) (grep-same-window)))
+
+;; macro recording
+(global-set-key (kbd "C-3")         'start-kbd-macro)
+(global-set-key (kbd "C-4")         'end-kbd-macro)
+(global-set-key (kbd "C-5")         'call-last-kbd-macro)
+
+;; misc
+(define-key global-map "\M-r"       'query-replace)
+(define-key global-map "\C-h"       'dabbrev-expand)
+(define-key global-map "\M-h"       (lambda() (interactive) (dabbrev-expand -1)))
+(define-key global-map "\C-x/"      'comment-region)
+(define-key global-map "\C-x\\"     'uncomment-region)
+
+;; don't show startup message and scratch message
+(setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
+
+;; hide toolbar and scrollbars
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; don't automatically wrap long lines
+(setq-default truncate-lines t) 
+(setq-default truncate-partial-width-windows nil) 
+
+;; mute bell
+(setq visible-bell t)
+
+;; fix page up/down
+(setq scroll-preserve-screen-position t) 
+(setq scroll-error-top-bottom t)
+
+;; show column numbers
+(setq column-number-mode t) 
+
+;; keep autosaves and backups in one place
+(setq backup-directory-alist          `((".*" . "~/.emacs.d/autosaves"))) ; or try:  (setq make-backup-files nil)
+(setq auto-save-file-name-transforms  `((".*" "~/.emacs.d/autosaves" t))) ; or try:  (setq auto-save-default nil)
+
+;; set up tabs as 4 spaces
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default c-basic-offset 4)
+(setq indent-line-function 'insert-tab)
+
+;; insert tabs in middle of line for C code
+(setq-default c-tab-always-indent nil)  
+
+;; basic theme or color scheme
+(set-background-color "black")
+(set-foreground-color "grey75")
+(set-cursor-color "green")
+(set-face-attribute 'font-lock-comment-face nil :foreground "green3")
+
+;; font lock coloring
+(setq jit-lock-stealth-time 0.5)      ; delay longer when scrolling
+(setq jit-lock-defer-time 0.1)        ; slightly higher for better updates when editing
+(setq font-lock-maximum-decoration 2) ; 1 = basic, 2 = more, 3 = max
+(global-font-lock-mode 1)             ; -1 to disable
+
+;; save place in every buffer
+(save-place-mode 1)
+
+;; save complete state
+(desktop-save-mode 1)
+
+;; recent file list (use instead of desktop-save-mode)
+;(recentf-mode 1)
+;(defun open-all-recent-files () (interactive) (dolist (file  recentf-list) (find-file file)))
+;(open-all-recent-files) ; DO IT NOW!!!
+
+;; utility function to run command in current window instead of other window
+(defun run-in-same-window (func)
+  (let ((display-buffer-overriding-action '(display-buffer-same-window (inhibit-same-window . nil))))
+    (if (listp func) (funcall func) (call-interactively func))))
+
+;; recursive directory search
+(require 'find-dired)
+(defun dired-search ()
+  "Recursive search showing only matching filenames that contain the search string."
+  (interactive)
+  (setq old-options find-grep-options)
+  (setq find-grep-options (concat find-grep-options " -F -i"))
+  (find-grep-dired (dired-current-directory) (read-string "Find string: "))
+  (setq find-grep-options old-options)
+  (dired-hide-details-mode))
+(define-key dired-mode-map "s"      'dired-search)
+
+;; recursive directory grep
+(defun dired-grep ()
+  "Recursive grep."
+  (interactive)
+  (setq old-cmd grep-find-command)
+  (setq grep-find-command '("find . -type f -exec grep -nHi --null -e \"\" \\{\\} +" . 43))
+  (run-in-same-window 'grep-find)
+  (setq grep-find-command old-cmd))
+(define-key dired-mode-map "S"      'dired-grep)
+
+;; expand all subfolders
+(defun dired-expand-listing ()
+  "Expand current dired listing recursively."
+  (interactive)
+  (goto-char 0)
+  (condition-case nil ; catch read error
+      (switch-to-buffer (dired-noselect (dired-current-directory) "-alR"))
+    (error nil))
+  (goto-char 0)
+  (dired-next-line 2))
+(define-key dired-mode-map "*"      'dired-expand-listing)
+
+;; filter lines in bufed, dired and grep
+(require 'dired)
+(require 'grep)
+(defun keep-matching-lines-and-highlight ()
+  "Keep matching lines in buffer and highlight the matches."
+  (interactive)
+  (setq buffer-read-only nil) ; change to r/w
+  (goto-char 0) (if (equal major-mode 'dired-mode) (forward-line))
+  (setq str (read-string "Filter: "))
+  (keep-lines str)
+  (unhighlight-regexp t)
+  (highlight-phrase str 'hi-red-b) ; use highlight-regexp for regexp version
+  (goto-char 0) (if (equal major-mode 'dired-mode) (dired-next-line 1)))
+(defun highlight-string () (interactive) (highlight-phrase (read-string "Highlight: ")))
+(defun highlight-clear () (interactive) (unhighlight-regexp t))
+(define-key Buffer-menu-mode-map "f" 'keep-matching-lines-and-highlight)
+(define-key dired-mode-map "f"      'keep-matching-lines-and-highlight)
+(define-key grep-mode-map "f"       'keep-matching-lines-and-highlight)
+
+;;-----------------------------------------------------------
+;; Chat-GPT AI generated code to monitor for file changes
+;; every 5 seconds and prompt for reload using dialog box.
+
+;;--------------------------------------------------
+;; Alternatively we could just blindly auto-revert
+;; every 5 seconds:
+;;
+;; (global-auto-revert-mode 1) ; Enable global auto-revert
+;; (setq auto-revert-interval 5) ; Check every 5 seconds
+;; (setq global-auto-revert-non-file-buffers t) ; Include non-file buffers (like dired)
+;; (setq auto-revert-verbose nil) ; Be quiet (no messages in minibuffer)
+;;--------------------------------------------------
+
+;; --- Robust external file-change watcher ---
+(defvar my-last-mtime-table (make-hash-table :test 'eq)
+  "Tracks last seen modification time for each buffer.")
+
+;; Update mtime whenever you save a buffer
+(defun my-update-last-mtime-on-save ()
+  "Record the last-seen mtime after saving."
+  (when buffer-file-name
+    (puthash (current-buffer)
+             (nth 5 (file-attributes buffer-file-name))
+             my-last-mtime-table)))
+
+(add-hook 'after-save-hook #'my-update-last-mtime-on-save)
+
+;; Timer function to check for external changes
+(defun my-poll-buffers-for-changes ()
+  "Prompt to revert buffers whose files changed externally."
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when buffer-file-name
+        (let ((last (gethash buf my-last-mtime-table))
+              (current (nth 5 (file-attributes buffer-file-name))))
+          (when (and last (not (equal current last)))
+            ;; update last-seen mtime immediately
+            (puthash buf current my-last-mtime-table)
+            ;; only prompt if buffer has no unsaved changes
+            (unless (buffer-modified-p)
+              (when (y-or-n-p
+                     (format "File %s changed on disk. Revert buffer? "
+                             (file-name-nondirectory buffer-file-name)))
+                (revert-buffer :ignore-auto :noconfirm))))
+          ;; initialize last-seen mtime for new buffers
+          (puthash buf current my-last-mtime-table))))))
+
+;; Run the global timer every 5 seconds
+;(run-with-timer 5 5 #'my-poll-buffers-for-changes)          ;mqm <--------------- ADD THIS BACK FOR AUTO-REVERT !!!
+
+;;------------------------------------
+;; Force revert all buffers
+
+(defun revert-all-no-confirm ()
+  "Revert all file buffers, without confirmation.
+Buffers visiting files that no longer exist are ignored.
+Files that are not readable (including do not exist) are ignored.
+Other errors while reverting a buffer are reported only as messages."
+  (interactive)
+  (let (file)
+    (dolist (buf  (buffer-list))
+      (setq file  (buffer-file-name buf))
+      (when (and file  (file-readable-p file))
+        (with-current-buffer buf
+          (with-demoted-errors "Error: %S" (revert-buffer t t)))))))
+
+;;======================================================================================================
+;; packages
+;;======================================================================================================
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("elpa" . "http://elpa.gnu.org/packages/") t) ; just for undo-tree!
+(setq package-archive-priorities '(("melpa" . 50) ("elpa" . 10)))
+(package-initialize)
+
+;; shows elisp package ratings via "paradox-list-packaged"
+(use-package paradox :ensure t)
+(require 'paradox)
+(paradox-enable)
+
+;; ripgrep/deadgrep (brew install ripgrep)
+(use-package ripgrep :ensure t) ; may not need this too
+(use-package deadgrep :ensure t)
+(defun my-deadgrep-project ()
+  (interactive)
+  (let ((deadgrep-project-root (project-root (project-current t))))
+    (call-interactively #'deadgrep)))
+(define-key global-map (kbd "C-x SPC") #'my-deadgrep-project)
+;(define-key global-map (kbd "C-x C-SPC") (lambda() (interactive) (run-in-same-window #'my-deadgrep-project)))
+
+;; wgrep for renaming files right in grep
+(use-package wgrep :ensure t)
+
+;; show changed git lines
+(use-package git-gutter :ensure t)
+(global-git-gutter-mode t)
+
+;; undo-fu
+(use-package undo-fu :ensure t)
+(define-key global-map "\M-u" 			'undo-fu-only-undo)
+(define-key global-map "\M-o" 			'undo-fu-only-redo)
+(global-set-key (kbd "C-9")             'undo-fu-only-undo)
+(global-set-key (kbd "C-0")             'undo-fu-only-redo)
+(global-set-key (kbd "C-/")             'undo-fu-only-undo)
+
+;; multiple-cursors
+(use-package multiple-cursors :ensure multiple-cursors)
+(transient-mark-mode t) ; must enable transient mark mode for this to work???
+(global-set-key (kbd "C-M-8")           'mc/mark-next-like-this-word);symbol
+(global-set-key (kbd "C-M-*")           'mc/mark-next-like-this)
+
+;; fancy stuff
+(use-package vertico :ensure t :init (setq vertico-count 16) :config (vertico-mode 1))
+(use-package marginalia :ensure t :config (marginalia-mode 1))
+(use-package orderless :ensure t :custom (completion-styles '(orderless basic)) (completion-category-overrides '((file (styles basic partial-completion)))))
+(use-package consult :ensure t)
+(use-package projectile :ensure t :config (projectile-mode 1))
+(use-package embark-consult :ensure t :after (embark consult)) 
+(use-package embark :ensure t)     
+
+;; don't use vertico for find-file
+(define-key global-map "\C-x\C-f"
+  (lambda() (interactive)
+	(unwind-protect
+		(progn
+		  (vertico-mode 0)
+		  (setq completion-styles '(basic partial-completion emacs22))
+		  (call-interactively #'find-file)
+		  (setq completion-styles '(orderless))
+		  (vertico-mode 1))
+	  (progn
+		(setq completion-styles '(orderless))
+		(vertico-mode 1)))))
+
+;; various bindings for use with consult
+(define-key global-map "\M-b" 'consult-buffer)
+(define-key global-map "\M-t" 'projectile-find-file) ; change to 'consult-projectile-find-file to show things a bit differently, requires consult-projectile package
+(define-key global-map "\M-f" 'consult-imenu)
+(define-key global-map "\M-m" 'consult-bookmark)
+(define-key global-map "\M-\C-f" 'consult-line)
+(define-key global-map (kbd "C-.") 'embark-act)
+(define-key global-map (kbd "C-x C-SPC") 'consult-grep)
+
+;;=======================================================
+;; note taking
+
+;; markdown
+(use-package markdown-mode :ensure t)
+(set-face-attribute 'markdown-header-face-1 nil :foreground "green" :height 300 :weight 'bold)
+(set-face-attribute 'markdown-header-face-2 nil :foreground "green" :height 250)
+(set-face-attribute 'markdown-header-face-3 nil :foreground "green" :height 200)
+(set-face-attribute 'markdown-header-face nil :foreground "green" :height 150)
+
+;; deft
+;; we need to do the settings in :init to get org-mode to work
+;; due to initialization order.
+(defvar my-deft-path "~/.deft/")
+(use-package deft
+  :ensure t
+  :init (setq deft-directory my-deft-path
+              deft-extensions '("md")       ; or list more if you really want them
+              deft-extension "md"           ; was "org")
+              deft-text-mode 'markdown-mode ; was 'org-mode)
+              deft-use-filename-as-title t
+              deft-recursive t              ; may not need to recurse subdirectories...
+              deft-current-sort-method 'title
+              deft-new-file-format "%Y-%m-%d_%H%M"))
+(setq deft-extensions '("txt" "tex" "md" "org"))
+(defun my-deft () (interactive) (cond ((eq last-command 'my-deft) (deft-refresh) (deft-filter-clear)) (t (deft)))) ; twice to refresh/reset
+(define-key global-map "\M-l" 'my-deft)
+(define-key deft-mode-map (kbd "M-n")   'deft-new-file)
+(define-key deft-mode-map (kbd "M-m")   'deft-new-file-named)
+(define-key deft-mode-map (kbd "M-a")   'deft-archive-file)
+(define-key deft-mode-map (kbd "M-d")   'deft-delete-file)
+(define-key deft-mode-map (kbd "M-r")   'deft-rename-file)
+(define-key deft-mode-map (kbd "M-f")   'deft-find-file)
+(define-key deft-mode-map (kbd "C-g")   (lambda() (interactive) (deft-refresh) (deft-filter-clear)))
+(define-key deft-mode-map (kbd "M-i")   'previous-line)
+(define-key deft-mode-map (kbd "M-k")   'next-line)
+(define-key deft-mode-map (kbd "$")     'deft-toggle-sort-method)
+(defun rgb-to-hex (r g b) (format "#%02x%02x%02x" r g b))
+(set-face-attribute 'deft-summary-face nil :foreground (rgb-to-hex 187 187 187))
+
+(defun my/deft-today ()
+  "Open today's Deft note, creating it with a Markdown header if needed."
+  (interactive)
+  (let* ((dir  (file-name-as-directory deft-directory))
+         (date (format-time-string "%Y-%m-%d"))
+         (file (expand-file-name
+                (concat date "." deft-default-extension) dir))
+         (new  (not (file-exists-p file))))
+    (find-file file)
+    (when new
+      (insert (format "# %s\n\n" date))  ;; e.g. "# 2026-01-05"
+      (save-buffer))))
+
+(global-set-key (kbd "C-M-t") #'my/deft-today)
+
+;;=======================================================
+;; backward/forward action like a web browser
+
+(use-package backward-forward
+  :ensure t
+  :config
+  (backward-forward-mode 1)
+
+  ;; Your back/forward keys
+  (global-set-key (kbd "C--") #'backward-forward-previous-location)
+  (global-set-key (kbd "C-_") #'backward-forward-next-location))
+
+;; Helper: push a mark before a jump if none recently.
+(defun my/push-mark-before-jump (&rest _args)
+  "Push mark so backward-forward can jump back here."
+  (push-mark))
+
+;; ;; Try this -- wrap scroll with a tiny throttle so you only push a mark when the last push was “a while ago”:
+;; (defvar my/last-mark-time 0)
+;; (defun my/push-mark-before-jump (&rest _args)
+;;   "Push mark so backward-forward can jump back here."
+;;   (let ((now (float-time)))
+;;     (when (> (- now my/last-mark-time) 0.5)  ; half-second guard
+;;       (push-mark)
+;;       (setq my/last-mark-time now)))
+  
+(dolist (fn '(switch-to-buffer
+              pop-to-buffer-same-window
+              xref-find-definitions
+              xref-find-references
+              imenu
+              project-find-file
+              next-error
+              previous-error
+              beginning-of-buffer
+              end-of-buffer
+              scroll-up-command
+              scroll-down-command
+              forward-page
+              backward-page
+              ;; org / outline / structure
+              org-goto                          ; do I even use org?
+              org-open-at-point                 ; do I even use org?
+              outline-next-visible-heading      ; do I even use org?
+              outline-previous-visible-heading  ; do I even use org?
+              ;; registers / bookmarks / ffap
+              jump-to-register
+              bookmark-jump
+              find-file-at-point
+              ;; optional extras, enable only if you use them a lot:
+              find-file         ; can be chatty!!!
+              consult-line      ; this may already push a mark...test it
+              consult-imenu     ; this may already push a mark...test it
+              consult-ripgrep   ; this may already push a mark...test it
+              org-clock-goto))  ; do I even use org?
+  (when (fboundp fn)
+    (advice-add fn :before #'my/push-mark-before-jump)))
+
+;;=======================================================
+;; ibuffer up/down
+
+(use-package ibuffer :ensure t)
+(use-package ibuffer-sidebar :ensure t)
+(require 'ibuffer)
+(require 'ibuffer-sidebar)
+
+;; Keys: up/down in *:Buffers:* while staying in main window
+;;   (my/ibuffer-keys-mode -1)  ;; turn off
+;;   (my/ibuffer-keys-mode 1)   ;; turn back on
+(defvar my/ibuffer-keys-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-M-i") (lambda () (interactive) (my/ibuffer-cycle 'prev)))
+    (define-key map (kbd "C-M-k") (lambda () (interactive) (my/ibuffer-cycle 'next)))
+    map)
+  "Keymap for `my/ibuffer-keys-mode'.")
+(define-minor-mode my/ibuffer-keys-mode
+  "Global minor mode for ibuffer cycling keys."
+  :global t
+  :init-value t
+  :keymap my/ibuffer-keys-mode-map)
+
+;; Make ibuffer default to alphabetic sort
+(setq ibuffer-default-sorting-mode 'alphabetic)
+
+;; Narrower
+(setq ibuffer-sidebar-width 25) 
+
+(defun my/ibuffer-cycle (direction)
+  "From the current window, move one buffer up/down in *:Buffers:* and show it here.
+DIRECTION is 'next or 'prev."
+  (interactive)
+  (ibuffer-sidebar-show-sidebar)
+  (let* ((main-win (selected-window))
+         (cur-buf  (window-buffer main-win))
+         (cur-name (buffer-name cur-buf))
+         (ibuf     (get-buffer "*:Buffers:*"))
+         (ibuf-win (cl-loop for win in (window-list)
+                            when (eq (window-buffer win) ibuf)
+                            return win)))
+    (unless ibuf
+      (user-error "No buffer named *:Buffers:*"))
+    (unless ibuf-win
+      (user-error "*:Buffers:* is not currently displayed in any window"))
+    (unless cur-name
+      (user-error "Current buffer has no name"))
+    (select-window ibuf-win)
+    (ibuffer-update nil)                      ;; refresh ibuffer [web:405]
+    (goto-char (point-min))
+    (unless (ibuffer-jump-to-buffer cur-name) ;; jump by name [web:405]
+      (user-error "Current buffer %s not present in *:Buffers:*" cur-name))
+    ;; if we're on 4th line and going up, just bail (don't move)
+    (when (and (eq direction 'prev)
+               (= (line-number-at-pos) 4))
+      (select-window main-win)
+      (switch-to-buffer cur-buf)
+      (cl-return-from my/ibuffer-cycle))
+    ;; if we're on last line and going down, bail
+    (when (and (eq direction 'next)
+               (save-excursion
+                 (forward-line 1)
+                 (eobp)))
+      (select-window main-win)
+      (switch-to-buffer cur-buf)
+      (cl-return-from my/ibuffer-cycle))
+    ;; move exactly one line in the chosen direction
+    (pcase direction
+      ('next (ibuffer-forward-line 1))
+      ('prev (ibuffer-backward-line 1)))
+    ;; try to get the buffer at this line; if none, keep the original
+    (let* ((candidate (ibuffer-current-buffer))       ;; nil on headers [web:405][web:520]
+           (next-buf (if (and candidate (buffer-live-p candidate))
+                         candidate
+                       cur-buf)))
+      (select-window main-win)
+      (switch-to-buffer next-buf))))
+
+;;----------------------------------------------
+;; update ibuffer position every few seconds
+
+(defvar my/ibuffer-sync-timer nil
+  "Timer object for `my/ibuffer-sync-start'.")
+
+(defun my/ibuffer-line-buffer-name ()
+  "Return the buffer name on the current ibuffer line, or nil."
+  (let ((line (buffer-substring-no-properties
+               (line-beginning-position) (line-end-position)))) [web:814]
+    ;; Very simple parse: find the first \"word\" after the flags/mark column.
+    (when (string-match "[^ ]+ +\\([^ ]+\\)" line)
+      (match-string 1 line))))
+
+(defun my/ibuffer-sync-once ()
+  "If *:Buffers:* exists, move point to the current buffer's line when needed."
+  (let* ((cur-win  (selected-window))
+         (cur-buf  (window-buffer cur-win)))
+    (unless (or (minibufferp cur-buf)
+                (window-minibuffer-p cur-win))
+      (let* ((cur-name (buffer-name cur-buf))
+             (ibuf     (get-buffer "*:Buffers:*"))
+             (ibuf-win (and ibuf
+                            (cl-loop for win in (window-list)
+                                     when (eq (window-buffer win) ibuf)
+                                     return win))))
+        (when (and ibuf ibuf-win cur-name)
+          (save-selected-window
+            (select-window ibuf-win)
+            ;; Are we already on this buffer's line? If so, do nothing.
+            (let ((here-name (my/ibuffer-line-buffer-name)))
+              (unless (and here-name (string= here-name cur-name))
+                (goto-char (point-min))
+                (ignore-errors
+                  (ibuffer-jump-to-buffer cur-name)))))))))) ;; same call style you had [web:405]
+
+(defun my/ibuffer-sync-start ()
+  "Start a repeating timer to sync *:Buffers:* every 2 seconds."
+  (interactive)
+  (unless (timerp my/ibuffer-sync-timer)
+    (setq my/ibuffer-sync-timer
+          (run-with-timer 0 2 #'my/ibuffer-sync-once)))) [web:713][web:716]
+
+(defun my/ibuffer-sync-stop ()
+  "Stop the repeating *:Buffers:* sync timer."
+  (interactive)
+  (when (timerp my/ibuffer-sync-timer)
+    (cancel-timer my/ibuffer-sync-timer)
+    (setq my/ibuffer-sync-timer nil)))
+
+(my/ibuffer-sync-start)
+
+;;=======================================================
+;; claude code ide
+
+(use-package vterm :ensure t)
+(use-package claude-code-ide
+  :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+  :bind ("C-c C-'" . claude-code-ide-menu)   ;; pick any key you like
+  :config
+  (claude-code-ide-emacs-tools-setup))      ;; optional, enables MCP Emacs tools
+
+
+;;
+;; TODO: look into lsp-mode  (language server protocol)
+;;
+
+
+
+
+
