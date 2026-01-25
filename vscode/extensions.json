@@ -1,0 +1,272 @@
+[
+  {
+    "metadata": {
+      "id": "58bfc5c5-9e14-40cb-afb8-104bfe792328",
+      "publisherId": "RoscoP.ActiveFileInStatusBar",
+      "publisherDisplayName": "RoscoP"
+    },
+    "name": "ActiveFileInStatusBar",
+    "publisher": "RoscoP",
+    "version": "1.0.3"
+  },
+  {
+    "metadata": {
+      "id": "b689fcc8-d494-4dbf-a228-2c694a578afc",
+      "publisherId": "alefragnani.Bookmarks",
+      "publisherDisplayName": "alefragnani"
+    },
+    "name": "Bookmarks",
+    "publisher": "alefragnani",
+    "version": "10.5.0"
+  },
+  {
+    "metadata": {
+      "id": "5a6e2b21-1d61-4acd-b31b-907f9c23f18a",
+      "publisherId": "CoenraadS.bracket-pair-colorizer-2",
+      "publisherDisplayName": "CoenraadS"
+    },
+    "name": "bracket-pair-colorizer-2",
+    "publisher": "CoenraadS",
+    "version": "0.0.28"
+  },
+  {
+    "metadata": {
+      "id": "e337c67b-55c2-4fef-8949-eb260e7fb7fd",
+      "publisherId": "Shan.code-settings-sync",
+      "publisherDisplayName": "Shan"
+    },
+    "name": "code-settings-sync",
+    "publisher": "Shan",
+    "version": "3.4.2"
+  },
+  {
+    "metadata": {
+      "id": "946b6c3e-cb86-4b44-b716-30bcb64ca9f1",
+      "publisherId": "hars.CppSnippets",
+      "publisherDisplayName": "hars"
+    },
+    "name": "CppSnippets",
+    "publisher": "hars",
+    "version": "0.0.14"
+  },
+  {
+    "metadata": {
+      "id": "690b692e-e8a9-493f-b802-8089d50ac1b2",
+      "publisherId": "ms-vscode.cpptools",
+      "publisherDisplayName": "ms-vscode"
+    },
+    "name": "cpptools",
+    "publisher": "ms-vscode",
+    "version": "0.25.1"
+  },
+  {
+    "metadata": {
+      "id": "d0bfc4ab-1d3a-4487-8782-7cf6027b4fff",
+      "publisherId": "ms-vscode.csharp",
+      "publisherDisplayName": "ms-vscode"
+    },
+    "name": "csharp",
+    "publisher": "ms-vscode",
+    "version": "1.21.1"
+  },
+  {
+    "metadata": {
+      "id": "438221f8-1107-4ccd-a6fe-f3b7fe0856b7",
+      "publisherId": "mhutchie.git-graph",
+      "publisherDisplayName": "mhutchie"
+    },
+    "name": "git-graph",
+    "publisher": "mhutchie",
+    "version": "1.14.0"
+  },
+  {
+    "metadata": {
+      "id": "4de763bd-505d-4978-9575-2b7696ecf94e",
+      "publisherId": "eamodio.gitlens",
+      "publisherDisplayName": "eamodio"
+    },
+    "name": "gitlens",
+    "publisher": "eamodio",
+    "version": "9.9.3"
+  },
+  {
+    "metadata": {
+      "id": "ea34e659-c634-449c-bb87-03e84a5600f9",
+      "publisherId": "thedavej.night-owl-black",
+      "publisherDisplayName": "thedavej"
+    },
+    "name": "night-owl-black",
+    "publisher": "thedavej",
+    "version": "1.0.2"
+  },
+  {
+    "metadata": {
+      "id": "1b747f06-3789-4ebd-ac99-f1fe430c3347",
+      "publisherId": "alefragnani.project-manager",
+      "publisherDisplayName": "alefragnani"
+    },
+    "name": "project-manager",
+    "publisher": "alefragnani",
+    "version": "10.7.0"
+  },
+  {
+    "metadata": {
+      "id": "f1f59ae4-9318-4f3c-a9b5-81b2eaa5f8a5",
+      "publisherId": "ms-python.python",
+      "publisherDisplayName": "ms-python"
+    },
+    "name": "python",
+    "publisher": "ms-python",
+    "version": "2019.9.34474"
+  },
+  {
+    "metadata": {
+      "id": "6df1a207-f7de-4011-a032-f8601625a880",
+      "publisherId": "vscode-snippet.snippet",
+      "publisherDisplayName": "vscode-snippet"
+    },
+    "name": "snippet",
+    "publisher": "vscode-snippet",
+    "version": "0.7.0"
+  },
+  {
+    "metadata": {
+      "id": "516c9b5b-a4bb-45f8-bcd3-96fea0bec771",
+      "publisherId": "swiip.sunset-theme",
+      "publisherDisplayName": "swiip"
+    },
+    "name": "sunset-theme",
+    "publisher": "swiip",
+    "version": "0.9.0"
+  },
+  {
+    "metadata": {
+      "id": "6acada9e-41fd-48cf-84c9-0b0eb36b4ef1",
+      "publisherId": "chrisgfortes.theme-black-ops-vscode",
+      "publisherDisplayName": "chrisgfortes"
+    },
+    "name": "theme-black-ops-vscode",
+    "publisher": "chrisgfortes",
+    "version": "1.0.3"
+  },
+  {
+    "metadata": {
+      "id": "467ab7ba-9060-4324-a0d3-c58f0f6d5aeb",
+      "publisherId": "k3a.theme-dark-plus-contrast",
+      "publisherDisplayName": "k3a"
+    },
+    "name": "theme-dark-plus-contrast",
+    "publisher": "k3a",
+    "version": "0.1.101"
+  },
+  {
+    "metadata": {
+      "id": "34e8730b-9399-4a96-9fee-6031960e2351",
+      "publisherId": "gerane.Theme-IRBlack",
+      "publisherDisplayName": "gerane"
+    },
+    "name": "Theme-IRBlack",
+    "publisher": "gerane",
+    "version": "0.0.2"
+  },
+  {
+    "metadata": {
+      "id": "3a38b988-6060-4072-bbcd-cb6d6793c76c",
+      "publisherId": "vip32bit.theme-monokai-black",
+      "publisherDisplayName": "vip32bit"
+    },
+    "name": "theme-monokai-black",
+    "publisher": "vip32bit",
+    "version": "0.1.0"
+  },
+  {
+    "metadata": {
+      "id": "261cac81-cd7b-4555-bb41-0c2d2bcd3e70",
+      "publisherId": "Gruntfuggly.todo-tree",
+      "publisherDisplayName": "Gruntfuggly"
+    },
+    "name": "todo-tree",
+    "publisher": "Gruntfuggly",
+    "version": "0.0.143"
+  },
+  {
+    "metadata": {
+      "id": "8dddff65-1f17-4f35-b6a2-a50d7829da04",
+      "publisherId": "lfs.vscode-emacs-friendly",
+      "publisherDisplayName": "lfs"
+    },
+    "name": "vscode-emacs-friendly",
+    "publisher": "lfs",
+    "version": "0.9.0"
+  },
+  {
+    "metadata": {
+      "id": "dd7c983e-6359-4955-94eb-c83b94edd844",
+      "publisherId": "howardzuo.vscode-favorites",
+      "publisherDisplayName": "howardzuo"
+    },
+    "name": "vscode-favorites",
+    "publisher": "howardzuo",
+    "version": "1.4.0"
+  },
+  {
+    "metadata": {
+      "id": "d637104e-1fd7-4063-98fc-8afe46012c9b",
+      "publisherId": "sleistner.vscode-fileutils",
+      "publisherDisplayName": "sleistner"
+    },
+    "name": "vscode-fileutils",
+    "publisher": "sleistner",
+    "version": "3.0.0"
+  },
+  {
+    "metadata": {
+      "id": "9ccc1dd7-7ec4-4a46-bd4f-7d7b8b9d322a",
+      "publisherId": "vscode-icons-team.vscode-icons",
+      "publisherDisplayName": "vscode-icons-team"
+    },
+    "name": "vscode-icons",
+    "publisher": "vscode-icons-team",
+    "version": "9.3.0"
+  },
+  {
+    "metadata": {
+      "id": "acee5b9f-6151-4920-96d3-cbae49f09071",
+      "publisherId": "pajoma.vscode-journal",
+      "publisherDisplayName": "pajoma"
+    },
+    "name": "vscode-journal",
+    "publisher": "pajoma",
+    "version": "0.10.0"
+  },
+  {
+    "metadata": {
+      "id": "4e5103c7-28d4-4a64-81e1-a912f5891900",
+      "publisherId": "Gruntfuggly.vscode-journal-view",
+      "publisherDisplayName": "Gruntfuggly"
+    },
+    "name": "vscode-journal-view",
+    "publisher": "Gruntfuggly",
+    "version": "0.0.25"
+  },
+  {
+    "metadata": {
+      "id": "28b20c66-dbb8-4c01-a0f9-590be00ec2d3",
+      "publisherId": "viktorqvarfordt.vscode-pitch-black-theme",
+      "publisherDisplayName": "viktorqvarfordt"
+    },
+    "name": "vscode-pitch-black-theme",
+    "publisher": "viktorqvarfordt",
+    "version": "1.2.3"
+  },
+  {
+    "metadata": {
+      "id": "876e8f93-74d0-4f4f-91b7-34a09f19f444",
+      "publisherId": "VisualStudioExptTeam.vscodeintellicode",
+      "publisherDisplayName": "VisualStudioExptTeam"
+    },
+    "name": "vscodeintellicode",
+    "publisher": "VisualStudioExptTeam",
+    "version": "1.1.9"
+  }
+]

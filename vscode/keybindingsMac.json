@@ -1,0 +1,162 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+k",
+        "command": "emacs.cursorDown",
+        "when": "editorTextFocus && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "emacs.cursorLeft",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "emacs.cursorPageDown",
+        "when": "editorTextFocus && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "emacs.cursorPageUp",
+        "when": "editorTextFocus && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "emacs.cursorRight",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "emacs.cursorUp",
+        "when": "editorTextFocus && !suggestWidgetVisible"
+    },
+    {
+        "key": "cmd+f",
+        "command": "workbench.action.gotoSymbol"
+    },
+    {
+        "key": "ctrl+x ctrl+g",
+        "command": "workbench.action.showAllSymbols"
+    },
+    {
+        "key": "cmd+w",
+        "command": "emacs.M-w",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "deleteRight",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "deleteWordPartRight",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+cmd+l",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "ctrl+cmd+j",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && editorLangId == 'c'"
+    },
+    {
+        "key": "ctrl+,",
+        "command": "references-view.find",
+        "when": "editorHasReferenceProvider"
+    },
+    {
+        "key": "ctrl+x 5",
+        "command": "workbench.action.splitEditorRight"
+    },
+    {
+        "key": "cmd+x",
+        "command": "workbench.action.showCommands"
+    },
+    {
+        "key": "ctrl+3",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+.",
+        "command": "editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "-workbench.action.quickOpenNavigateNextInEditorPicker",
+        "when": "inEditorsPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "-workbench.action.openNextRecentlyUsedEditorInGroup"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && editorLangId == 'cpp'"
+    },
+    {
+        "key": "ctrl+x ctrl+space",
+        "command": "workbench.action.findInFiles"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "bookmarks.toggleLabeled"
+    },
+    {
+        "key": "cmd+m",
+        "command": "bookmarks.listFromAllFiles"
+    },
+    {
+        "key": "cmd+k",
+        "command": "search.action.focusNextSearchResult",
+        "when": "hasSearchResult"
+    },
+    {
+        "key": "cmd+i",
+        "command": "search.action.focusPreviousSearchResult",
+        "when": "hasSearchResult"
+    },
+    {
+        "key": "ctrl+cmd+k",
+        "command": "references-view.next",
+        "when": "reference-list.hasResult"
+    },
+    {
+        "key": "ctrl+cmd+i",
+        "command": "references-view.prev",
+        "when": "reference-list.hasResult"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "emacs.C-k",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+x ctrl+e",
+        "command": "workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+x g",
+        "command": "workbench.action.gotoLine"
+    },
+    {
+        "key": "ctrl+x ctrl+b",
+        "command": "workbench.files.action.focusOpenEditorsView",
+        "when": "workbench.explorer.openEditorsView.active"
+    },
+    {
+        "key": "ctrl+x -",
+        "command": "workbench.action.closeActiveEditor"
+    },
+]
+
+
